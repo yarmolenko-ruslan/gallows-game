@@ -1,4 +1,5 @@
 @import url(../shared/lib/normalize.css);
+
 *,
 *::after,
 *::before,
@@ -20,4 +21,9 @@ h1,
 h2 {
 	padding: 0;
 	margin: 0;
+}
+
+button {
+	background-color: transparent;
+	cursor: pointer;
 }

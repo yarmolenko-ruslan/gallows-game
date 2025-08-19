@@ -1,40 +1,40 @@
-import { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './start.module.scss';
-import { Context } from '../../shared/constants';
-
-const URL = 'https://66c1719af83fffcb587951a3.mockapi.io/gallows';
+import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
+import { fetchGameData } from '../../features/game/model/thunks';
+import { gameSlice, startGame } from '../../features/game/model/gameSlice';
 
 const Start = () => {
-	const {
-		category,
-		setCategory,
-		setIsLoading,
-		isLoading,
-		data,
-		setData,
-		setCategoryList,
-		categoryList,
-	} = useContext(Context);
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	const { categories, loading, error, chosenCategory } = useAppSelector(
+		state => state.game
+	);
 
 	useEffect(() => {
-		setIsLoading(true);
-		fetch(URL)
-			.then(res => res.json())
-			.then(json => setData(json))
-			.catch(console.error)
-			.finally(() => setIsLoading(false));
-	}, []);
+		dispatch(fetchGameData());
+	}, [dispatch]);
 
-	useEffect(() => {
-		const categoryListApi = data.map(item => item.category);
-		setCategoryList(categoryListApi);
-	}, [data, setCategoryList]);
+	const handleCategorySelect = (id: string) => {
+		dispatch(gameSlice.actions.resetGame());
+		dispatch(gameSlice.actions.startGame(id));
+	};
+
+	const handleStart = () => {
+		if (chosenCategory) {
+			dispatch(startGame(chosenCategory));
+			navigate('/game');
+		}
+	};
 
 	const btnStatus = {
 		isActive: `${styles.item} ${styles.item_active}`,
 		isDisButton: `${styles.link} ${styles.link_disabled}`,
 	};
+
+	if (error) return <p>Ошибка: {error}</p>;
 
 	return (
 		<section className={styles.start}>
@@ -54,37 +54,34 @@ const Start = () => {
 
 				<h3 className={styles.subtitle}>Категории</h3>
 
-				{isLoading ? (
+				{loading ? (
 					<p className={styles.loading}>Загрузка...</p>
 				) : (
 					<ul className={styles.list}>
-						{categoryList.map((_category, index) => (
-							<li
-								key={index}
-								onClick={e => {
-									const target = e.target as HTMLElement;
-									setCategory(target.textContent?.toLowerCase() || '');
-								}}
-							>
+						{categories.map(cat => (
+							<li key={cat.id}>
 								<button
 									type='button'
+									onClick={() => handleCategorySelect(cat.id)}
 									className={
-										_category == category ? btnStatus.isActive : styles.item
+										chosenCategory === cat.id ? btnStatus.isActive : styles.item
 									}
 								>
-									{_category.toUpperCase()}
+									{cat.category}
 								</button>
 							</li>
 						))}
 					</ul>
 				)}
 
-				<Link
-					to={category && 'game'}
-					className={category ? styles.link : btnStatus.isDisButton}
+				<button
+					type='button'
+					onClick={handleStart}
+					className={chosenCategory ? styles.link : btnStatus.isDisButton}
+					disabled={!chosenCategory}
 				>
 					Начать игру
-				</Link>
+				</button>
 			</div>
 		</section>
 	);
