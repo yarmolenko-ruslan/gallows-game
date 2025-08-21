@@ -4,8 +4,8 @@ import { store } from './store';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './app.scss';
 
-import Start from '../pages/start/Start';
-import Game from '../pages/game/Game';
+import Start from '../pages/start/StartPage';
+import Game from '../pages/game/GamePage';
 
 const App = () => {
 	return (

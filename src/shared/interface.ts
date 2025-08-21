@@ -30,26 +30,3 @@ export interface IContextType {
 	isLoading: boolean;
 	setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
-
-export interface IContextProviderProps {
-	children: ReactNode;
-}
-
-export interface IAlphaProp {
-	handleGuess: (letter: string) => void;
-}
-
-export interface IWordProp {
-	renderGuesses: () => ReactNode[];
-	renderWord: () => ReactNode;
-}
-
-export interface IMainProp {
-	handleGuess: (letter: string) => void;
-	renderGuesses: () => ReactNode[];
-	renderWord: () => ReactNode;
-}
-
-export interface IFooterProp {
-	resetStateGame: () => void;
-}

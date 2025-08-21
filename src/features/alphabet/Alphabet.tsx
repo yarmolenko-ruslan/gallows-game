@@ -1,57 +1,49 @@
-import { useContext } from 'react';
+import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
+import { guessLetter } from '../game/model/gameSlice';
 import styles from './alphabet.module.scss';
-import { Context } from '../../shared/constants';
-import type { IAlphaProp } from '../../shared/interface';
-import { alphaWord } from './constants';
+import { ALPHABET } from './constants';
 
-function Alphabet({ handleGuess }: IAlphaProp) {
-	const {
-		category,
-		guesses,
-		wrongGuesses,
-		incorrectLetters,
-		isWinner,
-		gameOver,
-		maxWrongGuesses,
-	} = useContext(Context);
-	const remained = maxWrongGuesses - wrongGuesses;
+const Alphabet = () => {
+	const dispatch = useAppDispatch();
+
+	const { guessedLetters, mistakes, maxMistakes, gameStatus, word } =
+		useAppSelector(state => state.game);
+
+	const remained = maxMistakes - mistakes;
 
 	const btnStatus = {
 		isDisButton: `${styles.button_inactive} ${styles.button}`,
 		isActButton: `${styles.button_active} ${styles.button}`,
 	};
 
-	const isActiveButton = (word: string) => {
-		return incorrectLetters.includes(word) || !category
-			? btnStatus.isDisButton
-			: guesses.includes(word)
-			? btnStatus.isActButton
-			: styles.button;
+	const isActiveButton = (letter: string) => {
+		if (!word) return btnStatus.isDisButton;
+
+		if (guessedLetters.includes(letter.toLowerCase())) {
+			return word.toLowerCase().includes(letter.toLowerCase())
+				? btnStatus.isActButton
+				: btnStatus.isDisButton;
+		}
+
+		return styles.button;
 	};
 
-	const renderButton = (word: string, index: number) => {
+	const renderButton = (letter: string, index: number) => {
 		return (
 			<button
-				className={isActiveButton(word)}
 				key={index}
-				disabled={remained === 0 || gameOver || isWinner}
+				className={isActiveButton(letter)}
+				disabled={remained === 0 || gameStatus !== 'playing'}
+				onClick={() => dispatch(guessLetter(letter))}
 			>
-				{word}
+				{letter}
 			</button>
 		);
 	};
 
 	return (
-		<section
-			className={styles.alphabet}
-			onClick={e => {
-				const target = e.target as HTMLElement;
-				handleGuess(target.textContent || '');
-			}}
-		>
-			{alphaWord.map(renderButton)}
-		</section>
+		<section className={styles.alphabet}>{ALPHABET.map(renderButton)}</section>
 	);
-}
+};
 
 export default Alphabet;

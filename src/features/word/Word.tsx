@@ -1,27 +1,34 @@
-import { useContext } from 'react';
 import styles from './word.module.scss';
-import { Context } from '../../shared/constants';
-import type { IWordProp } from '../../shared/interface';
+import { useAppSelector } from '../../shared/lib/hooks';
 
-function Word({ renderWord, renderGuesses }: IWordProp) {
-	const { word, gameOver, isWinner, maxWrongGuesses, wrongGuesses } =
-		useContext(Context);
+function Word() {
+	const { guessedLetters, mistakes, maxMistakes, gameStatus, word } =
+		useAppSelector(state => state.game);
 
-	const remained = maxWrongGuesses - wrongGuesses;
+	const renderWord = () => {
+		return word
+			.split('')
+			.map(letter =>
+				letter === ' ' || guessedLetters.includes(letter.toLowerCase())
+					? letter
+					: '_ '
+			)
+			.join(' ');
+	};
+
+	console.log(gameStatus);
+
+	const remained = maxMistakes - mistakes;
 
 	return (
 		<section className={styles.word}>
-			{isWinner ? (
-				<h2 className={styles.title}>Поздравляем, вы выиграли!</h2>
-			) : gameOver ? (
-				<h2 className={styles.title}>Вы проиграли! Слово было: {word}</h2>
-			) : (
-				<h2 className={styles.title}>{renderWord()}</h2>
-			)}
+			<h2 className={styles.title}>Поздравляем, вы выиграли!</h2>
+			<h2 className={styles.title}>Вы проиграли! Слово было: {word}</h2>
+			<h2 className={styles.title}>{renderWord()}</h2>
 			<div className={styles.wrapper}>
 				<p className={styles.not_true}>
 					Не верные буквы:{' '}
-					<span className={styles.guesses_word}>{renderGuesses()}</span>
+					<span className={styles.guesses_word}>{renderWord()}</span>
 				</p>
 				<p className={styles.attempts}>
 					Осталось попыток:{' '}
