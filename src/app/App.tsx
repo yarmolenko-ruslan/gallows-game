@@ -6,6 +6,7 @@ import './app.scss';
 
 import Start from '../pages/start/StartPage';
 import Game from '../pages/game/GamePage';
+import { ProtectedRoute } from './ProtectedRoute';
 
 const App = () => {
 	return (
@@ -14,7 +15,14 @@ const App = () => {
 				<BrowserRouter>
 					<Routes>
 						<Route path='/' element={<Start />} />
-						<Route path='/game' element={<Game />} />
+						<Route
+							path='/game'
+							element={
+								<ProtectedRoute>
+									<Game />
+								</ProtectedRoute>
+							}
+						/>
 					</Routes>
 				</BrowserRouter>
 			</Provider>

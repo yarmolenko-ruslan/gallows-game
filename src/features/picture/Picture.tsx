@@ -1,23 +1,21 @@
-import { useContext } from 'react';
-
 import styles from './picture.module.scss';
-import { Context } from '../../shared/constants';
 
-function Picture() {
-	const { wrongGuesses, maxWrongGuesses } = useContext(Context);
+import { useAppSelector } from '../../shared/lib/hooks';
+import { images } from './constants';
 
-	const remained = maxWrongGuesses - wrongGuesses;
+const Picture = () => {
+	const { mistakes } = useAppSelector(state => state.game);
 
 	return (
 		<section className={styles.picture}>
 			<img
+				src={images[mistakes]}
 				className={styles.img}
-				src={`/images/${remained}.png`}
 				alt='Виселица'
 				title='Виселица'
 			/>
 		</section>
 	);
-}
+};
 
 export default Picture;
