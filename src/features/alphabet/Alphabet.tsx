@@ -1,7 +1,7 @@
+import { ALPHABET } from '../../shared/config/constants';
 import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
 import { guessLetter } from '../game/model/gameSlice';
 import styles from './alphabet.module.scss';
-import { ALPHABET } from './constants';
 
 const Alphabet = () => {
 	const dispatch = useAppDispatch();
@@ -42,7 +42,9 @@ const Alphabet = () => {
 	};
 
 	return (
-		<section className={styles.alphabet}>{ALPHABET.map(renderButton)}</section>
+		<section className={styles.alphabet}>
+			{ALPHABET.split('').map(renderButton)}
+		</section>
 	);
 };
 

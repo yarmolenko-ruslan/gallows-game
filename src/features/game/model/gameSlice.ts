@@ -1,13 +1,15 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { GameState } from './types';
+
 import { fetchGameData } from './thunks';
+import { MAX_MISTAKES } from '../../../shared/config/constants';
+import type { GameState } from '../../../shared/types/types';
 
 const initialState: GameState = {
 	chosenCategory: null,
 	word: '',
 	guessedLetters: [],
 	mistakes: 0,
-	maxMistakes: 6, // Вынести отдельно
+	maxMistakes: MAX_MISTAKES,
 	gameStatus: 'idle',
 	categories: [],
 	loading: false,
@@ -20,7 +22,7 @@ export const gameSlice = createSlice({
 	reducers: {
 		startGame(state, action: PayloadAction<string>) {
 			const categoryId = action.payload;
-			state.chosenCategory = categoryId; 
+			state.chosenCategory = categoryId;
 			state.guessedLetters = [];
 			state.mistakes = 0;
 			state.gameStatus = 'playing';
