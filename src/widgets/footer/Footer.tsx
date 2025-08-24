@@ -1,6 +1,6 @@
 import styles from './footer.module.scss';
-import { useAppDispatch } from '../../shared/lib/hooks';
-import { resetGame } from '../../features/game/model/gameSlice';
+import { useAppDispatch } from '@shared/lib/hooks';
+import { resetGame } from '@features/game/model/gameSlice';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {

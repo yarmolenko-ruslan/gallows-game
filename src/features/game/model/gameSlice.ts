@@ -1,8 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-
 import { fetchGameData } from './thunks';
-import { MAX_MISTAKES } from '../../../shared/config/constants';
-import type { GameState } from '../../../shared/types/types';
+import { MAX_MISTAKES } from '@shared/config/constants';
+import type { GameState } from '@shared/types/types';
 
 const initialState: GameState = {
 	chosenCategory: null,

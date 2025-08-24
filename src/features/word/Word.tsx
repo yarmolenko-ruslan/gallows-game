@@ -1,5 +1,5 @@
 import styles from './word.module.scss';
-import { useAppSelector } from '../../shared/lib/hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 
 function Word() {
 	const { guessedLetters, mistakes, maxMistakes, gameStatus, word } =

@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-import { BASE_URL } from '../../../shared/config/constants';
-import type { Category } from '../../../shared/types/types';
+import { BASE_URL } from '@shared/config/constants';
+import type { Category } from '@shared/types/types';
 
 const API_BASE = import.meta.env.VITE_API_URL || BASE_URL;
 

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './start.module.scss';
-import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
-import { fetchGameData } from '../../features/game/model/thunks';
-import { gameSlice, startGame } from '../../features/game/model/gameSlice';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { fetchGameData } from '@features/game/model/thunks';
+import { gameSlice, startGame } from '@features/game/model/gameSlice';
 
 const Start = () => {
 	const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
 import styles from './picture.module.scss';
 
-import { useAppSelector } from '../../shared/lib/hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { images } from './constants';
 
 const Picture = () => {

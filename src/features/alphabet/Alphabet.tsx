@@ -1,6 +1,6 @@
-import { ALPHABET } from '../../shared/config/constants';
-import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
-import { guessLetter } from '../game/model/gameSlice';
+import { ALPHABET } from '@shared/config/constants';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { guessLetter } from '@features/game/model/gameSlice';
 import styles from './alphabet.module.scss';
 
 const Alphabet = () => {

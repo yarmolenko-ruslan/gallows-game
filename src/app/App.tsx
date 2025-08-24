@@ -1,29 +1,16 @@
 import { StrictMode } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './app.scss';
-
-import Start from '../pages/start/StartPage';
-import Game from '../pages/game/GamePage';
-import { ProtectedRoute } from './ProtectedRoute';
+import { AppRouter } from './providers/router';
 
 const App = () => {
 	return (
 		<StrictMode>
 			<Provider store={store}>
 				<BrowserRouter>
-					<Routes>
-						<Route path='/' element={<Start />} />
-						<Route
-							path='/game'
-							element={
-								<ProtectedRoute>
-									<Game />
-								</ProtectedRoute>
-							}
-						/>
-					</Routes>
+					<AppRouter />
 				</BrowserRouter>
 			</Provider>
 		</StrictMode>

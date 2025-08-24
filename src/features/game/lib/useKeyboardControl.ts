@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { guessLetter } from '../model/gameSlice';
 
 export const useKeyboardControl = () => {
