@@ -1,19 +1,6 @@
+import { initialState } from '@/shared/config/constants';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { fetchGameData } from './thunks';
-import { MAX_MISTAKES } from '@shared/config/constants';
-import type { GameState } from '@shared/types/types';
-
-const initialState: GameState = {
-	chosenCategory: null,
-	word: '',
-	guessedLetters: [],
-	mistakes: 0,
-	maxMistakes: MAX_MISTAKES,
-	gameStatus: 'idle',
-	categories: [],
-	loading: false,
-	error: null,
-};
 
 export const gameSlice = createSlice({
 	name: 'game',

@@ -1,6 +1,6 @@
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
 import { useEffect, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import { guessLetter } from '../model/gameSlice';
+import { guessLetter } from '../model';
 
 export const useKeyboardControl = () => {
 	const dispatch = useAppDispatch();
