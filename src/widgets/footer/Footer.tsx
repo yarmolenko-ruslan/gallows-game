@@ -1,9 +1,11 @@
-import styles from './footer.module.scss';
-import { useAppDispatch } from '@shared/lib/hooks';
-import { resetGame } from '@features/game/model/gameSlice';
 import { Link } from 'react-router-dom';
 
-export default function Footer() {
+import { useAppDispatch } from '@/shared';
+import { resetGame } from '@/features';
+
+import styles from './footer.module.scss';
+
+export function Footer() {
 	const dispatch = useAppDispatch();
 
 	const handleReset = () => {

@@ -1,9 +1,10 @@
 import { StrictMode } from 'react';
-import { Provider } from 'react-redux';
-import { store } from './store';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import { store } from './store';
+import { AppRouter } from './providers';
 import './app.scss';
-import { AppRouter } from './providers/router';
 
 const App = () => {
 	return (

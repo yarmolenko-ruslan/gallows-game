@@ -1,9 +1,11 @@
 import styles from './word.module.scss';
 import { useAppSelector } from '@shared/lib/hooks';
 
-function Word() {
+export function Word() {
 	const { guessedLetters, mistakes, maxMistakes, gameStatus, word } =
 		useAppSelector(state => state.game);
+
+	const remained = maxMistakes - mistakes;
 
 	const renderWord = () => {
 		return word
@@ -15,8 +17,6 @@ function Word() {
 			)
 			.join(' ');
 	};
-
-	const remained = maxMistakes - mistakes;
 
 	return (
 		<section className={styles.word}>
@@ -43,5 +43,3 @@ function Word() {
 		</section>
 	);
 }
-
-export default Word;

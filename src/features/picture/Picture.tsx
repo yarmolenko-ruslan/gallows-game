@@ -3,7 +3,7 @@ import styles from './picture.module.scss';
 import { useAppSelector } from '@shared/lib/hooks';
 import { images } from './constants';
 
-const Picture = () => {
+export const Picture = () => {
 	const { mistakes } = useAppSelector(state => state.game);
 
 	return (
@@ -17,5 +17,3 @@ const Picture = () => {
 		</section>
 	);
 };
-
-export default Picture;

@@ -1,9 +1,10 @@
 import { ALPHABET } from '@shared/config/constants';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { guessLetter } from '@features/game/model/gameSlice';
+
 import styles from './alphabet.module.scss';
 
-const Alphabet = () => {
+export const Alphabet = () => {
 	const dispatch = useAppDispatch();
 
 	const { guessedLetters, mistakes, maxMistakes, gameStatus, word } =
@@ -47,5 +48,3 @@ const Alphabet = () => {
 		</section>
 	);
 };
-
-export default Alphabet;

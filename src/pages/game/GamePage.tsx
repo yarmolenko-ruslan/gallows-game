@@ -1,12 +1,9 @@
-import styles from './game.module.scss';
-import Header from '@widgets/header/Header.tsx';
-import Picture from '@features/picture/Picture.tsx';
-import Word from '@features/word/Word.tsx';
-import Alphabet from '@features/alphabet/Alphabet.tsx';
-import Footer from '@widgets/footer/Footer.tsx';
-import { useKeyboardControl } from '@features/game/lib/useKeyboardControl.ts';
+import { Footer, Header } from '@/widgets';
+import { Alphabet, Picture, useKeyboardControl, Word } from '@/features';
 
-function Game() {
+import styles from './game.module.scss';
+
+export function Game() {
 	const { focusRef, handleKeydown } = useKeyboardControl();
 
 	return (
@@ -28,5 +25,3 @@ function Game() {
 		</section>
 	);
 }
-
-export default Game;
